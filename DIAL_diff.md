@@ -53,3 +53,45 @@ Sam created **3 JIRA tickets** with:
 4. Focus on understanding the sequence ID generation logic in the C/Java `load_dial` component
 
 The key insight: **record counts matched, but relationships didn't**—which is why your team's count-based validation passed but the data was still fundamentally broken.
+
+
+
+## Tone of the Call
+
+The overall tone was **professional, collaborative, and diplomatically direct**. A few notable dynamics:
+
+**Eddie (Speaker B)** - Managed the conversation carefully, balancing several objectives:
+- Appreciative but firm about transitioning ownership away from Santosh's team
+- Gently redirected Santosh when he started problem-solving ("that wasn't the purpose of the call today")
+- Acknowledged the hard work put in while being clear the deliverable wasn't as complete as expected
+- Used phrases like "I love that about you" when tempering Santosh's instinct to jump back in
+
+**Sam (Speaker C)** - Technical and measured:
+- Presented findings factually without being accusatory
+- Repeatedly acknowledged the team's effort ("hours upon hours working on this")
+- Focused on problem description rather than blame
+
+**Santosh (Speaker A)** - Receptive and accountable:
+- Took the feedback gracefully ("thanks a lot for highlighting this")
+- Self-deprecating humor at the end ("dial mod is going to be in our heads for this weekend")
+- Instinctively wanted to help fix it, had to be gently steered away
+
+**Corey (Speaker D)** - Process-oriented:
+- Focused on sprint planning and resource allocation
+- Set boundaries (9 hours for Ganga) while remaining flexible
+
+There was a slight undercurrent of **managing expectations**—Eddie making it clear the work wasn't "code complete as originally thought" and "there's more discrepancies than initially told to us."
+
+---
+
+## Other Issues Eddie Mentioned
+
+Eddie outlined **three main issues** at the start:
+
+| Issue | Description | Scale |
+|-------|-------------|-------|
+| **1. Constraints/Referential Integrity** | Missing PK-FK constraints on `dial_mod` causing "headless" modules with no correct relationship to `dial_int` | ~8.2 million orphaned rows |
+| **2. Mod Score Mismatches** | Count discrepancies between modernized and legacy in model score data | ~9-10 million difference |
+| **3. Tin Summary Mismatches** | `tin_sid` relationship issues in `tin_summary` table | Tens to hundreds of thousands |
+
+Eddie also mentioned a **character set mismatch error** that was discovered during testing on Geeta (likely a test environment), which threw errors when attempting a `dial_mod` query. He suggested this might explain why the issue wasn't caught earlier.
